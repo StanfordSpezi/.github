@@ -1,5 +1,5 @@
 #
-# This source file is part of the Stanford Biodesign for Digital Health open-source project
+# This source file is part of the Stanford Spezi open-source project
 #
 # SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
 #
@@ -8,7 +8,7 @@
 
 name: 🚀 Major feature request
 description: Suggest a new idea for this project
-title: "🚀 Major feature request: Remove this title with a descriptive title."
+title: "Major feature request: Remove this title with a descriptive title."
 labels: ["enhancement", "major version bump"]
 body:
   - type: markdown
@@ -57,7 +57,7 @@ body:
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/StanfordBDHG/.github/blob/main/CODE_OF_CONDUCT.md) and [Contributing Guidelines](https://github.com/StanfordBDHG/.github/blob/main/CONTRIBUTING.md)
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/StanfordSpezi/.github/blob/main/CODE_OF_CONDUCT.md) and [Contributing Guidelines](https://github.com/StanfordSpezi/.github/blob/main/CONTRIBUTING.md)
       options:
         - label: I agree to follow this project's Code of Conduct and Contributing Guidelines
           required: true

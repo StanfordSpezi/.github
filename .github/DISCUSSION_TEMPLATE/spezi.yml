@@ -1,31 +1,35 @@
 #
-# This source file is part of the Stanford Biodesign for Digital Health open-source project
+# This source file is part of the Stanford Spezi open-source project
 #
 # SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
 #
 # SPDX-License-Identifier: MIT
 #
 
-title: "[CardinalKit] "
-labels: ["CardinalKit"]
+title: "[Stanford Spezi] "
+labels: ["Stanford Spezi"]
 body:
   - type: markdown
     attributes:
       value: |
-        Please use this form to describe your CardinalKit-related question.
+        Please use this form to describe your Stanford Spezi-related question.
   - type: dropdown
     attributes:
-      label: What CardinalKit module is your challenge related to?
+      label: What Stanford Spezi module is your challenge related to?
       options:
-        - CardinalKit
-        - Account
-        - Contact
-        - FHIR
-        - HealthKitDataSource
-        - LocalStorage
-        - Onboarding
-        - Scheduler
-        - SecureStorage
+        - Spezi
+        - SpeziAccount
+        - SpeziContact
+        - SpeziFHIR
+        - SpeziFirebase
+        - SpeziHealthKit
+        - SpeziLocalStorage
+        - SpeziOnboarding
+        - SpeziQuestionnaire
+        - SpeziScheduler
+        - SpeziStorage
+        - SpeziViews
+        - SpeziTemplateApplication
         - Other module
     validations:
       required: true
@@ -70,7 +74,7 @@ body:
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/StanfordBDHG/.github/blob/main/CODE_OF_CONDUCT.md) and [Contributing Guidelines](https://github.com/StanfordBDHG/.github/blob/main/CONTRIBUTING.md)
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/StanfordSpezi/.github/blob/main/CODE_OF_CONDUCT.md) and [Contributing Guidelines](https://github.com/StanfordSpezi/.github/blob/main/CONTRIBUTING.md)
       options:
         - label: I agree to follow this projects's Code of Conduct and Contributing Guidelines
           required: true
