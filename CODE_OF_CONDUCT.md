@@ -1,6 +1,6 @@
 <!--
 
-This source file is part of the Stanford Biodesign for Digital Health open-source project
+This source file is part of the Stanford Spezi open-source project
 
 SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
 
@@ -70,7 +70,7 @@ representative at an online or offline event.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement at cardinalkit@stanford.edu.
+reported to the community leaders responsible for enforcement at speziteam@stanford.edu.
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the
