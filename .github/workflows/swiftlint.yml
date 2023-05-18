@@ -21,6 +21,9 @@ jobs:
   swiftlint:
     name: SwiftLint
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.path }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -30,5 +33,3 @@ jobs:
         with:
           swiftlint-version: '0.50.0'
           swiftlint-args: --strict
-        env:
-          WORKING_DIRECTORY: ${{ inputs.path }}
