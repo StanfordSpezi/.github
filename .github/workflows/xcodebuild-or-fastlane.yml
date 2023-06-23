@@ -167,7 +167,7 @@ jobs:
         APP_STORE_CONNECT_API_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
         APPLE_ID: ${{ secrets.APPLE_ID }}
     - name: Upload artifact
-      if: always()
+      if: ${{ (success() || failure()) && inputs.artifactname != '' }}
       uses: actions/upload-artifact@v3
       with:
         name: ${{ inputs.artifactname }}
