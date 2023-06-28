@@ -20,6 +20,6 @@ jobs:
         with:
           fetch-depth: 0
       - name: SwiftLint
-        uses: Supereg/action-swiftlint@v4
+        uses: supereg/action-swiftlint@v4
         with:
           args: --strict
