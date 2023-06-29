@@ -31,7 +31,7 @@ jobs:
           VERSION=${{ steps.latest-version.outputs.tag }}
           MAJOR=${VERSION%%.*}
           MINOR=${VERSION%.*}
-          
+
           echo "major=$MAJOR" >> $GITHUB_OUTPUT
           echo "minor=$MINOR" >> $GITHUB_OUTPUT
         id: version
@@ -42,4 +42,4 @@ jobs:
       - uses: actions-ecosystem/action-push-tag@v1
         with:
           tag: ${{ steps.version.outputs.minor }}
-          message: '${{ steps.version.outputs.minor }}
+          message: ${{ steps.version.outputs.minor }}
