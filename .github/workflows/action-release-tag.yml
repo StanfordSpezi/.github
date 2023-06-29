@@ -21,9 +21,6 @@ on:
         description: 'GitHub Personal Access Token (PAT) if the default branch is protected and needs a specific access token to push tags to the branch'
         required: false
 
-permissions:
-  contents: write
-
 jobs:
   tagrelease:
     name: Action Tag Release
