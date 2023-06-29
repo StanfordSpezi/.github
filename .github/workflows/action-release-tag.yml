@@ -9,7 +9,7 @@
 name: Action Tag Release
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       user:
         description: 'Optional GitHub username that is associated with the GitHub Personal Access Token (PAT)'
