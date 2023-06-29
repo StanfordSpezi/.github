@@ -43,7 +43,10 @@ jobs:
           
           git switch --detach ${VERSION}
           
-          git tag -a -f "${MAJOR}" -m "${MAJOR}"
-          git tag -a -f "${MINOR}" -m "${MINOR}"
+          git push origin :refs/tags/${MAJOR}
+          git tag -fa "${MAJOR}" -m "${MAJOR}"
+          git push origin --tags
 
-          git push -f --tags
+          git push origin :refs/tags/${MINOR}
+          git tag -fa "${MINOR}" -m "${MINOR}"
+          git push origin --tags
