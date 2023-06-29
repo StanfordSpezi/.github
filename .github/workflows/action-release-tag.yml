@@ -41,7 +41,7 @@ jobs:
           git config user.name "${{ inputs.user || github.actor }}"
           git config user.email "${{ inputs.user || github.actor }}@users.noreply.github.com"
           
-          git checkout ${VERSION}
+          git switch --detach ${VERSION}
           
           git tag -a -f "${MAJOR}" -m "${MAJOR}"
           git tag -a -f "${MINOR}" -m "${MINOR}"
