@@ -1,0 +1,45 @@
+#
+# This source file is part of the Stanford Spezi open-source project
+#
+# SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
+#
+# SPDX-License-Identifier: MIT
+#
+
+name: Action Tag Release
+
+on:
+  workflow_call:
+  release:
+    types: [created]
+
+permissions:
+  contents: write
+
+jobs:
+  tagrelease:
+    name: Action Tag Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions-ecosystem/action-get-latest-tag@v1
+        id: latest-tag
+      - name: Retrieve version
+        run: |
+          VERSION=${{ steps.latest-tag.outputs.tag }}
+          MAJOR=${VERSION%%.*}
+          MINOR=${VERSION%.*}
+
+          echo "major=$MAJOR" >> $GITHUB_OUTPUT
+          echo "minor=$MINOR" >> $GITHUB_OUTPUT
+        id: version
+      - uses: actions-ecosystem/action-push-tag@v1
+        with:
+          tag: ${{ steps.version.outputs.major }}
+          message: ${{ steps.version.outputs.major }}
+      - uses: actions-ecosystem/action-push-tag@v1
+        with:
+          tag: ${{ steps.version.outputs.minor }}
+          message: ${{ steps.version.outputs.minor }}
