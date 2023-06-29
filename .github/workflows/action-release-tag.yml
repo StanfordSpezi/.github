@@ -19,7 +19,7 @@ on:
     secrets:
       access-token:
         description: 'GitHub Personal Access Token (PAT) if the default branch is protected and needs a specific access token to push tags to the branch'
-        required: false
+        required: true
 
 jobs:
   tagrelease:
@@ -41,6 +41,9 @@ jobs:
           git config user.name "${{ github.event.inputs.user || github.actor }}"
           git config user.email "${{ github.event.inputs.user || github.actor }}@users.noreply.github.com"
           
+          git checkout ${VERSION}
+          
           git tag -a -f "${MAJOR}" -m "${MAJOR}"
           git tag -a -f "${MINOR}" -m "${MINOR}"
+
           git push -f --tags
