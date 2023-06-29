@@ -32,14 +32,9 @@ jobs:
           MAJOR=${VERSION%%.*}
           MINOR=${VERSION%.*}
 
-          echo "major=$MAJOR" >> $GITHUB_OUTPUT
-          echo "minor=$MINOR" >> $GITHUB_OUTPUT
-        id: version
-      - uses: actions-ecosystem/action-push-tag@v1
-        with:
-          tag: ${{ steps.version.outputs.major }}
-          message: ${{ steps.version.outputs.major }}
-      - uses: actions-ecosystem/action-push-tag@v1
-        with:
-          tag: ${{ steps.version.outputs.minor }}
-          message: ${{ steps.version.outputs.minor }}
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+          git tag -a "${MAJOR}" -m "${MAJOR}"
+          git tag -a "${MINOR}" -m "${MINOR}"
+          git push -f --tags
