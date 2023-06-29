@@ -10,7 +10,7 @@ SPDX-License-Identifier: MIT
 
 # Security Policy
 
-Please report security vulnerabilities using the [privately reporting a security vulnerability\(https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/best-practices-for-writing-repository-security-advisories) functionality on GitHub to the Stanford Spezi team.
+Please report security vulnerabilities using the [privately reporting a security vulnerability](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/best-practices-for-writing-repository-security-advisories) functionality on GitHub to the Stanford Spezi team.
 We highly value your input and will get back to you as soon as possible. Please include steps to reproduce, context, and any further information that makes identifying and resolving the vulnerability as quickly as possible.
 
 See the [The CERT Guide to Coordinated Vulnerability Disclosure](https://vuls.cert.org/confluence/display/CVD/The+CERT+Guide+to+Coordinated+Vulnerability+Disclosure) for additional background information about the coordinated vulnerability disclosure process.
