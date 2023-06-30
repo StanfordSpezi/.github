@@ -30,12 +30,15 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.access-token || github.token }}
-      - name: Get latest tag
-        id: latest-tag
-        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
       - name: Retrieve version
         run: |
-          VERSION=${{ steps.latest-tag.outputs.tag }}
+          VERSION=$(git describe --tags --abbrev=0 --match="v[0-9]*.[0-9]*.[0-9]*" || echo "")
+          
+          if [ -z "$VERSION" ]
+          then
+            exit 0
+          fi
+
           MAJOR=${VERSION%%.*}
           MINOR=${VERSION%.*}
           
