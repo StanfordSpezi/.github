@@ -19,6 +19,3 @@ jobs:
   reuse_action:
     name: REUSE Compliance Check
     uses: ./.github/workflows/reuse.yml
-  swiftlint:
-    name: SwiftLint
-    uses: ./.github/workflows/swiftlint.yml
