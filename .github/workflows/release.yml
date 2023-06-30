@@ -9,15 +9,13 @@
 name: Release
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - 'v*.*.*'
   workflow_dispatch:
 
 jobs:
   releasetag:
     name: Tag Release
     uses: ./.github/workflows/action-release-tag.yml
-    secrets:
-      access-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-    with:
-      user: PaulsAutomationBot
+
