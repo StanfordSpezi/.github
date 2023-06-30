@@ -30,11 +30,12 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.access-token || github.token }}
-      - uses: actions-ecosystem/action-get-latest-tag@v1
-        id: latest-version
+      - name: Get latest tag
+        id: latest-tag
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
       - name: Retrieve version
         run: |
-          VERSION=${{ steps.latest-version.outputs.tag }}
+          VERSION=${{ steps.latest-tag.outputs.tag }}
           MAJOR=${VERSION%%.*}
           MINOR=${VERSION%.*}
           
