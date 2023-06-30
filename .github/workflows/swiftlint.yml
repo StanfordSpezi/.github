@@ -14,13 +14,4 @@ on:
 jobs:
   swiftlint:
     name: SwiftLint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: SwiftLint
-        uses: sinoru/actions-swiftlint@v6
-        with:
-          swiftlint-version: '0.50.0'
-          swiftlint-args: --strict
+    uses: StanfordBDHG/.github/.github/workflows/swiftlint.yml@v2
