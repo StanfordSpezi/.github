@@ -21,9 +21,6 @@ on:
         description: 'GitHub Personal Access Token (PAT) if the default branch is protected and needs a specific access token to push tags to the branch'
         required: false
 
-permissions:
-  contents: write
-
 jobs:
   tagrelease:
     name: Action Tag Release
@@ -32,18 +29,31 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ github.event.secrets.access-token || github.token }}
-      - uses: actions-ecosystem/action-get-latest-tag@v1
-        id: latest-version
+          token: ${{ secrets.access-token || github.token }}
       - name: Retrieve version
         run: |
-          VERSION=${{ steps.latest-version.outputs.tag }}
+          VERSION=$(git describe --tags --abbrev=0 --match="v[0-9]*.[0-9]*.[0-9]*" || echo "")
+
+          if [ -z "$VERSION" ]
+          then
+            echo "Did not identify a tag using semantic versioning in the commit history"
+            exit 0
+          fi
+
           MAJOR=${VERSION%%.*}
           MINOR=${VERSION%.*}
+
+          echo "Push Tags $MAJOR and $MINOR for $VERSION"
           
-          git config user.name "${{ github.event.inputs.user || github.actor }}"
-          git config user.email "${{ github.event.inputs.user || github.actor }}@users.noreply.github.com"
+          git config user.name "${{ inputs.user || github.actor }}"
+          git config user.email "${{ inputs.user || github.actor }}@users.noreply.github.com"
           
-          git tag -a "${MAJOR}" -m "${MAJOR}"
-          git tag -a "${MINOR}" -m "${MINOR}"
-          git push -f --tags
+          git switch --detach ${VERSION}
+          
+          git push origin :refs/tags/${MAJOR}
+          git tag -fa "${MAJOR}" -m "${MAJOR}"
+          git push origin --tags
+
+          git push origin :refs/tags/${MINOR}
+          git tag -fa "${MINOR}" -m "${MINOR}"
+          git push origin --tags
