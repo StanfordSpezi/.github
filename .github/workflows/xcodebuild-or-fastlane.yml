@@ -1,6 +1,7 @@
 #
 # This source file is part of the Stanford Spezi open-source project
-#
+# It is a copy of the xcodebuild-or-fastlane.yml GitHub Action workflow as copied from the Stanford Biodesign Digital Health organization.
+# 
 # SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
 #
 # SPDX-License-Identifier: MIT
@@ -20,7 +21,7 @@ on:
         description: 'JSON-based collection of labels indicating which type of github runner should be chosen'
         required: false
         type: string
-        default: '["macos-latest"]'
+        default: '["macos-13"]'
       xcodeversion:
         description: 'The Xcode version used for the build'
         required: false
@@ -28,6 +29,16 @@ on:
         default: 'latest-stable'
       scheme:
         description: 'The scheme in the Xcode project. Either use `scheme` to use xcodebuild, `fastlanelane` to use fastlane, or a custom command using `customcommand`'
+        required: false
+        type: string
+        default: ''
+      destination:
+        description: 'The destination parameter that should be passed to xcodebuild. Defaults to the iOS simulator using an iPhone 14 Pro'
+        required: false
+        type: string
+        default: 'platform=iOS Simulator,name=iPhone 14 Pro'
+      resultBundle:
+        description: 'The name of the Xcode result bundle that is passed to xcodebuild. If not defined, the name of the scheme + .xcresult is used.'
         required: false
         type: string
         default: ''
@@ -115,10 +126,10 @@ jobs:
           swift --version
           echo "env.selfhosted: ${{ env.selfhosted }}"
     - name: Install xcpretty
-      if: "!env.selfhosted && inputs.scheme != ''"
+      if: ${{ !env.selfhosted && inputs.scheme != '' }}
       run: gem install xcpretty
     - name: Cache .derivedData folder
-      if: "inputs.cacheDerivedData"
+      if: ${{ inputs.cacheDerivedData }}
       uses: actions/cache@v3
       with:
         path: .derivedData
@@ -126,22 +137,22 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-${{ runner.arch }}-derivedData-
     - name: Cache Firebase Emulators
-      if: "!env.selfhosted && inputs.setupfirebaseemulator"
+      if: ${{ !env.selfhosted && inputs.setupfirebaseemulator }}
       uses: actions/cache@v3
       with:
         path: ~/.cache/firebase/emulators
         key: ${{ runner.os }}-${{ runner.arch }}-firebase-emulators-${{ hashFiles('~/.cache/firebase/emulators/**') }}
     - name: Setup NodeJS
-      if: "!env.selfhosted && inputs.setupfirebaseemulator"
+      if: ${{ !env.selfhosted && inputs.setupfirebaseemulator }}
       uses: actions/setup-node@v3
     - name: Setup Java
-      if: "!env.selfhosted && inputs.setupfirebaseemulator"
+      if: ${{ !env.selfhosted && inputs.setupfirebaseemulator }}
       uses: actions/setup-java@v3
       with:
         distribution: 'microsoft'
         java-version: '17'
     - name: Install Firebase CLI Tools
-      if: "!env.selfhosted && inputs.setupfirebaseemulator"
+      if: ${{ !env.selfhosted && inputs.setupfirebaseemulator }}
       run: npm install -g firebase-tools
     - name: Install the Apple certificate and provisioning profile
       if: ${{ inputs.setupsigning }}
@@ -173,7 +184,7 @@ jobs:
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
     - name: Initialize CodeQL
-      if: ${{ inputs.codeql }}
+      if: ${{ !env.selfhosted && inputs.codeql }}
       uses: github/codeql-action/init@v2
       with:
         languages: swift
@@ -181,6 +192,11 @@ jobs:
     - name: Run custom command
       if: ${{ inputs.customcommand != '' }}
       run: ${{ inputs.customcommand }}
+      env:
+        APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+        APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        APP_STORE_CONNECT_API_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+        APPLE_ID: ${{ secrets.APPLE_ID }}
     - name: Resolve dependencies (xcodebuild)
       if: ${{ inputs.scheme != '' }}
       run: |
@@ -198,15 +214,20 @@ jobs:
           else
               XCODECOMMAND="build"
           fi
+
+          if [ -z "${{ inputs.resultBundle }}" ]; then
+              RESULTBUNDLE=${{ inputs.scheme }}.xcresult
+          else
+              RESULTBUNDLE=${{ inputs.resultBundle }}
+          fi
+
           set -o pipefail \
           && xcodebuild $XCODECOMMAND \
-            -scheme ${{ inputs.scheme }} \
-            -sdk iphonesimulator \
-            -destination "name=iPhone 14 Pro" \
+            -scheme "${{ inputs.scheme }}" \
+            -destination "${{ inputs.destination }}" \
             $CODECOVERAGEFLAG \
             -derivedDataPath ".derivedData" \
-            -resultBundlePath ${{ inputs.scheme }}.xcresult \
-            CODE_SIGN_IDENTITY="" \
+            -resultBundlePath "$RESULTBUNDLE" \
             CODE_SIGNING_REQUIRED=NO \
           | xcpretty
     - name: Fastlane
@@ -218,7 +239,7 @@ jobs:
         APP_STORE_CONNECT_API_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
         APPLE_ID: ${{ secrets.APPLE_ID }}
     - name: Perform CodeQL Analysis
-      if: ${{ inputs.codeql }}
+      if: ${{ !env.selfhosted && inputs.codeql }}
       uses: github/codeql-action/analyze@v2
     - name: Upload artifact
       if: ${{ (success() || failure()) && inputs.artifactname != '' }}
@@ -227,7 +248,7 @@ jobs:
         name: ${{ inputs.artifactname }}
         path: ${{ inputs.path }}/${{ inputs.artifactname }}
     - name: Clean up keychain and provisioning profile
-      if: "(inputs.setupsigning && env.selfhosted) || failure()"
+      if: ${{ (inputs.setupsigning && env.selfhosted) || failure() }}
       run: |
         security delete-keychain $RUNNER_TEMP/app-signing.keychain-db || true
-        rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision || true
+        rm -rf ~/Library/MobileDevice/Provisioning\ Profiles || true
