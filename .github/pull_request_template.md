@@ -20,7 +20,7 @@ SPDX-License-Identifier: MIT
 
 
 ## :books: Documentation
-*Please ensure that you properly document any additions in conformance to [Spezi Documentation Guide](https://github.com/StanfordSpezi/.github/blob/main/CODE_OF_CONDUCT.md).*
+*Please ensure that you properly document any additions in conformance to [Spezi Documentation Guide](https://github.com/StanfordSpezi/.github/blob/main/DocumentationGuide.md).*
 *You can use this section to describe your solution, but we encourage contributors to document your reasoning and changes using in-line documentation.* 
 
 
