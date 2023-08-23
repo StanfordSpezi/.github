@@ -45,10 +45,10 @@ GitHub offers equal elements for README documents, e.g.:
 All images MUST be available in dark and light mode.
 The document MUST be configured to automatically load the appropriate image, e.g., in markdown using
 ```md
-![Spezi Footer](https://raw.githubusercontent.com/StanfordSpezi/.github/main/assets/Footer.png#gh-light-mode-only)
-![Spezi Footer](https://raw.githubusercontent.com/StanfordSpezi/.github/main/assets/Footer~dark.png#gh-dark-mode-only)
+![Example Image](https://raw.githubusercontent.com/StanfordSpezi/.github/main/Example.png#gh-light-mode-only)
+![Example Image](https://raw.githubusercontent.com/StanfordSpezi/.github/main/Example~dark.png#gh-dark-mode-only)
 ```
-or using the [DocC Image naming schemes](https://developer.apple.com/documentation/docc/image#Provide-Image-Variants).
+and using the [DocC Image naming schemes](https://developer.apple.com/documentation/docc/image#Provide-Image-Variants).
 
 User interface screenshots MUST include a device frame, e.g., using [ControlRoom](https://github.com/twostraws/ControlRoom) or other software solutions. The background of the images MUST be transparent to use the background color of the documentation document or README.
 
@@ -124,8 +124,8 @@ Contributions to this project are welcome. Please make sure to read the [contrib
 
 This project is licensed under the MIT License. See [Licenses](https://github.com/StanfordSpezi/SpeziContact/tree/main/LICENSES) for more information.
 
-![Spezi Footer](https://raw.githubusercontent.com/StanfordSpezi/.github/main/assets/FooterLight.png#gh-light-mode-only)
-![Spezi Footer](https://raw.githubusercontent.com/StanfordSpezi/.github/main/assets/FooterDark.png#gh-dark-mode-only)
+![Spezi Footer](https://raw.githubusercontent.com/StanfordSpezi/.github/main/assets/Footer.png#gh-light-mode-only)
+![Spezi Footer](https://raw.githubusercontent.com/StanfordSpezi/.github/main/assets/Footer~dark.png#gh-dark-mode-only)
 ```
 
 ## Further Details
