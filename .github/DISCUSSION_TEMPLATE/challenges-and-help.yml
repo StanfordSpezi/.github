@@ -6,13 +6,13 @@
 # SPDX-License-Identifier: MIT
 #
 
-title: "[Stanford Spezi] "
-labels: ["Stanford Spezi"]
+title: "Challenges and Help"
+labels: ["Challenges and Help"]
 body:
   - type: markdown
     attributes:
       value: |
-        Please use this form to describe your Stanford Spezi-related question.
+        Thanks for taking the time to share any questions or challenges you have with a Stanford Spezi module!
   - type: dropdown
     attributes:
       label: What Stanford Spezi module is your challenge related to?
@@ -24,6 +24,7 @@ body:
         - SpeziFirebase
         - SpeziHealthKit
         - SpeziLocalStorage
+        - SpeziML
         - SpeziOnboarding
         - SpeziQuestionnaire
         - SpeziScheduler

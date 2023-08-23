@@ -6,13 +6,32 @@
 # SPDX-License-Identifier: MIT
 #
 
-title: "[Ideas] "
+title: "Ideas"
 labels: ["Ideas"]
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for taking the time to share your improvement idea!
+  - type: dropdown
+    attributes:
+      label: What Stanford Spezi module is your idea related to?
+      options:
+        - Spezi
+        - SpeziAccount
+        - SpeziContact
+        - SpeziFHIR
+        - SpeziFirebase
+        - SpeziHealthKit
+        - SpeziLocalStorage
+        - SpeziML
+        - SpeziOnboarding
+        - SpeziQuestionnaire
+        - SpeziScheduler
+        - SpeziStorage
+        - SpeziViews
+        - SpeziTemplateApplication
+        - Other module
   - type: textarea
     id: usecase
     attributes:
