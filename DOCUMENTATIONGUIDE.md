@@ -32,7 +32,12 @@ The documentation MUST use appropriate [GitHub markdown syntax](https://docs.git
 Related types within the module MUST be linked using [markdown links](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#links) or [DocC links](https://www.swift.org/documentation/docc/formatting-your-documentation-content#Link-to-Symbols-and-Other-Content).
 Essential external types SHOULD be linked to, e.g., the Apple Documentation like the [`@State`](https://developer.apple.com/documentation/swiftui/state) property wrapper.
 
-Code examples MUST use the proper syntax highlighting.
+Code examples MUST use proper syntax highlighting, e.g.,:
+````md
+```swift
+let name = "Paul"
+```
+````
 
 Elements like [notes and other asides](https://www.swift.org/documentation/docc/documenting-a-swift-framework-or-package) SHOULD be used.
 GitHub offers equal elements for README documents, e.g.:
@@ -40,6 +45,9 @@ GitHub offers equal elements for README documents, e.g.:
 > [!IMPORTANT] 
 > An important element ...
 ```
+
+You SHOULD use [`@_documentation(visibility: ...)`](https://github.com/apple/swift/blob/main/docs/ReferenceGuides/UnderscoredAttributes.md#_documentationvisibility-) to hide elements from the documentation that should not appear in the public documentation.
+It is RECOMMENDED to use `@_documentation(visibility: internal)` to an `@_exported import` statement to ensure that all public symbols of the imported module are not exposed in the documentation of the Spezi module.
 
 You can learn more about DocC by reading the documentation or watching the DocC Apple World Wide Developer Conference (WWDC) videos:
 - [swift.org - DocC Documentation](https://www.swift.org/documentation/docc/#)
