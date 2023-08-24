@@ -13,6 +13,8 @@ SPDX-License-Identifier: MIT
 This document defines the documentation requirement for a Spezi Module and hints and examples on how to best structure your documentation.
 The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
 
+The module MUST conform to this guide within two months after changes have been published to be considered in conformance with this guide.
+
 The README and documentation of the [SpeziMockWebService module](https://github.com/StanfordSpezi/SpeziMockWebService) are good examples of how documentation can be structured and written.
 
 
@@ -39,6 +41,11 @@ GitHub offers equal elements for README documents, e.g.:
 > An important element ...
 ```
 
+You can learn more about DocC by reading the documentation or watching the DocC Apple World Wide Developer Conference (WWDC) videos:
+- [swift.org - DocC Documentation](https://www.swift.org/documentation/docc/#)
+- [WWDC 2023 - Create rich documentation with Swift-DocC](https://developer.apple.com/wwdc23/10244)
+- [WWDC 2022 - Improve the discoverability of your Swift-DocC content](https://developer.apple.com/wwdc22/110369)
+
 
 ### Images
 
@@ -64,6 +71,12 @@ The overview SHOULD include a graphical representation of the package's function
 
 The landing page MAY also include a code example.
 It MUST link to the main types relevant to the Spezi module and SHOULD provide some guidance to articles that guide the user to learn more about the module.
+
+
+### Articles
+
+More comprehensive module features SHOULD be explained in articles and extension files guiding developers on using the API and other functionality.
+You can learn more about adding supplemental content to a documentation in the [swift.org - Adding Supplemental Content to a Documentation Catalog article](https://www.swift.org/documentation/docc/adding-supplemental-content-to-a-documentation-catalog).
 
 
 ## README
