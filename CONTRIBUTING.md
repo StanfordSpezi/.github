@@ -24,7 +24,7 @@ Pull requests SHALL be the best way to propose changes to the codebase.
 
 ## Documentation
 
-All documentation MUST conform to our [Documentation Guide](https://github.com/StanfordSpezi/.github/blob/main/DocumentationGuide.md)
+All documentation MUST conform to our [Documentation Guide](https://github.com/StanfordSpezi/.github/blob/main/DOCUMENTATIONGUIDE.md)
 
 ## Testing
 
