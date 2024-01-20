@@ -32,10 +32,10 @@ on:
         type: string
         default: ''
       destination:
-        description: 'The destination parameter that should be passed to xcodebuild. Defaults to the iOS simulator using an iPhone 15 Pro Simulator'
+        description: 'The destination parameter that should be passed to xcodebuild. Defaults to the iOS simulator using an iPhone 15 Pro'
         required: false
         type: string
-        default: 'platform=iOS Simulator,name=iPhone 15 Pro Simulator'
+        default: 'platform=iOS Simulator,name=iPhone 15 Pro'
       setupSimulators:
         description: 'Flag indicating if all iOS simulators matching the `destination` input shoud be setup (e.g. password autofill functionality should be disabled).'
         required: false
@@ -254,7 +254,8 @@ jobs:
         echo "Device name: $DEVICE_NAME"
         
         # Retrieve the iOS simulator IDs for the specified device
-        SIMULATOR_IDS=$(xctrace list devices | grep "$DEVICE_NAME" | awk '{print $NF}' | tr -d '()')
+        REGEX_PATTERN="$DEVICE_NAME( Simulator)? \(.*\)"
+        SIMULATOR_IDS=$(xctrace list devices | grep -E "$REGEX_PATTERN" | awk '{print $NF}' | tr -d '()')
 
         # Check if SIMULATOR_IDS is empty
         if [ -z "$SIMULATOR_IDS" ]; then
