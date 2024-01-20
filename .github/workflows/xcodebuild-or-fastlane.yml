@@ -297,6 +297,7 @@ jobs:
             plutil -replace restrictedBool.allowPasswordAutoFill.value -bool NO $PLIST1
             plutil -replace restrictedBool.allowPasswordAutoFill.value -bool NO $PLIST2
             plutil -replace restrictedBool.allowPasswordAutoFill.value -bool NO $PLIST3
+            /usr/libexec/PlistBuddy -c "Add :KeyboardContinuousPathEnabled bool false" /Users/githubaction/Library/Developer/CoreSimulator/Devices/$SIMULATOR_ID/data/Library/Preferences/com.apple.keyboard.ContinuousPath.plist
 
             sleep 1
 
