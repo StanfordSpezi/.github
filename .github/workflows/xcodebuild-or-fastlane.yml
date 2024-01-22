@@ -345,6 +345,12 @@ jobs:
               RESULTBUNDLE=${{ inputs.resultBundle }}
           fi
 
+          if [ "${{ inputs.buildConfig }}" = "Release" ]; then
+            ENABLE_TESTING_FLAG="OTHER_SWIFT_FLAGS=\$(inherited) -enable-testing"
+          else
+            ENABLE_TESTING_FLAG=""
+          fi
+
           set -o pipefail \
           && xcodebuild $XCODECOMMAND \
             -scheme "${{ inputs.scheme }}" \
@@ -354,6 +360,7 @@ jobs:
             -derivedDataPath ".derivedData" \
             -resultBundlePath "$RESULTBUNDLE" \
             CODE_SIGNING_REQUIRED=NO \
+            $ENABLE_TESTING_FLAG
           | xcpretty
     - name: Fastlane
       if: ${{ inputs.fastlanelane != '' }}
