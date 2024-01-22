@@ -346,9 +346,9 @@ jobs:
           fi
 
           if [ "${{ inputs.buildConfig }}" = "Release" ]; then
-              ENABLE_TESTING_FLAG="OTHER_SWIFT_FLAGS=\"\$(inherited) -enable-testing\""
+              ENABLE_TESTING_FLAG="OTHER_SWIFT_FLAGS=$(inherited) -enable-testing"
           else
-              ENABLE_TESTING_FLAG="OTHER_SWIFT_FLAGS=\"\$(inherited)\""
+              ENABLE_TESTING_FLAG="OTHER_SWIFT_FLAGS=$(inherited)"
           fi
 
           set -o pipefail \
