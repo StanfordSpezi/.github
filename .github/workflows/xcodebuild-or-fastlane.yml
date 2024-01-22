@@ -346,11 +346,9 @@ jobs:
           fi
 
           if [ "${{ inputs.buildConfig }}" = "Release" ]; then
-              ENABLE_TESTING_FLAG="OTHER_SWIFT_FLAGS=\$(inherited) -enable-testing"
-              echo "Build config is Release. Setting ENABLE_TESTING_FLAG to '$ENABLE_TESTING_FLAG'"
+              ENABLE_TESTING_FLAG="OTHER_SWIFT_FLAGS=-enable-testing"
           else
               ENABLE_TESTING_FLAG=""
-              echo "Build config is not Release. ENABLE_TESTING_FLAG is not set."
           fi
 
           set -o pipefail \
@@ -362,7 +360,7 @@ jobs:
             -derivedDataPath ".derivedData" \
             -resultBundlePath "$RESULTBUNDLE" \
             CODE_SIGNING_REQUIRED=NO \
-            $ENABLE_TESTING_FLAG
+            $ENABLE_TESTING_FLAG \
           | xcpretty
     - name: Fastlane
       if: ${{ inputs.fastlanelane != '' }}
