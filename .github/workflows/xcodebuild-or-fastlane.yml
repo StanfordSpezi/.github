@@ -346,8 +346,7 @@ jobs:
           fi
 
           if [ "${{ inputs.buildConfig }}" = "Release" ]; then
-              ENABLE_TESTING_FLAG="OTHER_SWIFT_FLAGS=\"\$(inherited) -enable-testing\""
-              echo "ENABLE_TESTING_FLAG: $ENABLE_TESTING_FLAG"
+              ENABLE_TESTING_FLAG="-enable-testing"
           else
               ENABLE_TESTING_FLAG=""
           fi
@@ -361,7 +360,7 @@ jobs:
             -derivedDataPath ".derivedData" \
             -resultBundlePath "$RESULTBUNDLE" \
             CODE_SIGNING_REQUIRED=NO \
-            OTHER_SWIFT_FLAGS="\$(inherited) -enable-testing" \
+            OTHER_SWIFT_FLAGS="\$(inherited) $ENABLE_TESTING_FLAG" \
           | xcpretty
     - name: Fastlane
       if: ${{ inputs.fastlanelane != '' }}
