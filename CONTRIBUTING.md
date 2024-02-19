@@ -22,8 +22,37 @@ GitHub discussions SHALL be the best way to brainstorm your suggestions.
 GitHub issues SHALL be the best way to document decisions or bugs.
 Pull requests SHALL be the best way to propose changes to the codebase.
 
+## GitHub Account & Commit Signing
+
+Each contribution to a Spezi repository REQUIRES [a GitHub account](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github).
+We RECOMMEND to [add your full name](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/personalizing-your-profile#changing-your-profile-name), [a representative profile picture](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/personalizing-your-profile#changing-your-profile-picture), and [your preferred pronoums](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/personalizing-your-profile#adding-pronouns-to-your-profile) to your GitHub Account to make it easier to address you and recognize you across commits.
+
+In addition, all commits to Spezi repositories MUST be signed.
+[You can learn more about commit signature verification and how to set it up in the GitHub documentation.](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification).
+
+> [!IMPORTANT]  
+> Be sure to set up commit signature verification **before** you make your first commit to a Stanford Spezi repository or a fork you plan to use to contribute to a Stanford Spezi repository.
+
+## Your first contribution to a Spezi Project
+
+Stanford Spezi consits of a wide varity of projets in different programming languages.
+While many things are common to all the different programming languages and setups some specific subsystems require
+
+### Swift-based Spezi Projects
+
+Spezi has a great collection of Swift Package-based modules: https://swiftpackageindex.com/StanfordSpezi.
+
+"Swift packages are reusable components of Swift, Objective-C, Objective-C++, C, or C++ code that developers can use in their projects." [Swift Packages - Apple Documentation]. Contributing to Spezi requires a fundamental understanding of the structure of a Swift Package. Please take a look at the Creating a standalone Swift package with Xcode article by Apple detailing the structure of a Swift Package. Each Spezi Module contains a Swift Package including the Package.swift file at the root of the repository.
+
+You can open a Swift Package in Xcode by opening the Package.swift file with Xcode. All Swift Packages are localized (learn more at Localizing package resources - Apple Documentation) and some Packages bundle resources such as JSON files and images (Bundling resources with a Swift package - Apple Documentation).
+
+All Spezi Modules contain a testing setup, it is essential to test all the functionality and run those tests during the development process. You can learn more about running tests in Xcode: Running tests and interpreting results - Apple Documentation.
+
+All Spezi Modules that contain user interface elements contain a UI (user interface) test application that allows us to write UI test for the packages and test out user interfaces in a small example application. You can find it in the Tests/UITests folder and we recommend to work in this project when developing on a Spezi package that contains a user interface.
+
 ## Documentation
 
+Every new contribution MUST be properly documented.
 All documentation MUST conform to our [Documentation Guide](https://swiftpackageindex.com/stanfordspezi/spezi/documentation/spezi/documentation-guide)
 
 ## Testing
