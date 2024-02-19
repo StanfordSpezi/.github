@@ -121,5 +121,5 @@ The [WWDC 2020 session "Write tests to fail"](https://developer.apple.com/wwdc20
 #### Documentation
 
 The Swift-based Stanford Spezi modules contain a [DocC-based](https://github.com/apple/swift-docc) documentation merging inline documentation, dedicated articles, and tutorials within a single documentation bundle deployed to the Swift Package Index.
-
-Individual symbols MUST 
+The DocC documentation archives are typically found in the Swift Package target's respective sources folder.
+You can learn more about the documentation requirements for Swift-based Spezi Packages in the [Spezi Documentation Guide](https://swiftpackageindex.com/stanfordspezi/spezi/documentation/spezi/documentation-guide).
