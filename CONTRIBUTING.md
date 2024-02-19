@@ -97,29 +97,4 @@ While many things are common to all the different programming languages and setu
 
 ### Swift-based Spezi Projects
 
-Spezi has a great collection of Swift Package-based modules: https://swiftpackageindex.com/StanfordSpezi.
-
-#### Swift Packages
-
-"Swift packages are reusable components of Swift, Objective-C, Objective-C++, C, or C++ code that developers can use in their projects." [[Swift Packages - Apple Documentation](https://developer.apple.com/documentation/xcode/swift-packages)]. Contributing to Spezi requires a fundamental understanding of the structure of a Swift Package. Please take a look at the [Creating a standalone Swift package with Xcode article by Apple](https://developer.apple.com/documentation/xcode/creating-a-standalone-swift-package-with-xcode) detailing the structure of a Swift Package. Each Spezi Module contains a Swift Package, including the `Package.swift` file at the root of the repository.
-
-You can open a Swift Package in Xcode by opening the Package.swift file with Xcode.
-All Swift Packages are localized (learn more at [Localizing package resources - Apple Documentation](https://developer.apple.com/documentation/xcode/bundling-resources-with-a-swift-package)) and some Packages bundle resources such as JSON files and images ([Bundling resources with a Swift package - Apple Documentation](https://developer.apple.com/documentation/xcode/bundling-resources-with-a-swift-package)).
-All contributions MUST use these localization features and MUST use the Swift Package Manager mechanism to bundle resources with a Swift Package.
-
-#### Testing
-
-As noted in the Contributing Guidelines, all changes MUST be properly tested.
-Therefore, all Swift Spezi Modules contain a testing setup; it is essential to test all the functionality and run those tests during the development process.
-You can learn more about running tests in [Xcode: Running tests and interpreting results - Apple Documentation](https://developer.apple.com/documentation/xcode/running-tests-and-interpreting-results).
-
-All Spezi Modules that contain user interface elements contain a UI (user interface) test application that allows us to write UI tests for the packages and test out user interfaces in a small example application.
-You can find it in the `Tests/UITests` folder, and we RECOMMEND working on this project when developing a Spezi package that contains a user interface.
-All user interface-related changes MUST be tested using UI tests.
-The [WWDC 2020 session "Write tests to fail"](https://developer.apple.com/wwdc20/10091) is a great resource for learning more about UI testing.
-
-#### Documentation
-
-The Swift-based Stanford Spezi modules contain a [DocC-based](https://github.com/apple/swift-docc) documentation merging inline documentation, dedicated articles, and tutorials within a single documentation bundle deployed to the Swift Package Index.
-The DocC documentation archives are typically found in the Swift Package target's respective sources folder.
-You can learn more about the documentation requirements for Swift-based Spezi Packages in the [Spezi Documentation Guide](https://swiftpackageindex.com/stanfordspezi/spezi/documentation/spezi/documentation-guide).
+Spezi has a great collection of Swift Package-based modules: https://swiftpackageindex.com/StanfordSpezi. You MUST conform to the [Swift-specific Contributing Guideleines](https://swiftpackageindex.com/stanfordspezi/spezi/documentation/spezi/contributing-guide) if you make a contribution to a Swift-based Stanford Spezi project.
