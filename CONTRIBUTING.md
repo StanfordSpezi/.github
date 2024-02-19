@@ -17,7 +17,7 @@ The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SH
 We REQUIRED using [GitHub Discussions](https://docs.github.com/en/discussions) at [https://github.com/orgs/StanfordSpezi/discussions](https://github.com/orgs/StanfordSpezi/discussions) for any discussions about the project.
 You MUST follow our [Code of Conduct](https://github.com/StanfordSpezi/.github/blob/main/CODE_OF_CONDUCT.md).
 
-We REQUIRED using the [Github Flow](https://guides.github.com/introduction/flow/index.html) for all code-related contributions.
+We REQUIRED using the [Github Flow](https://docs.github.com/en/get-started/using-github/github-flow) for all code-related contributions.
 GitHub discussions SHALL be the best way to brainstorm your suggestions. 
 GitHub issues SHALL be the best way to document decisions or bugs.
 Pull requests SHALL be the best way to propose changes to the codebase.
@@ -33,22 +33,18 @@ In addition, all commits to Spezi repositories MUST be signed.
 > [!IMPORTANT]  
 > Be sure to set up commit signature verification **before** you make your first commit to a Stanford Spezi repository or a fork you plan to use to contribute to a Stanford Spezi repository.
 
-## Your first contribution to a Spezi Project
+## Make your Contribution: Fork & Pull Request 
 
-Stanford Spezi consits of a wide varity of projets in different programming languages.
-While many things are common to all the different programming languages and setups some specific subsystems require
+The Stanford Spezi open-source project follows the [Github Flow](https://docs.github.com/en/get-started/using-github/github-flow) to enable everyone to easily contribute to a repositiry using [forks](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks) and [pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
 
-### Swift-based Spezi Projects
+As a contributor who is not part of the core team, you MUST create a fork to contribute to a Stanford Spezi repository. "Forks let you make changes to a project without affecting the original repository"[[About forks - GitHub Documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks)]. We RECOMMEND to follow the ["Fork a repository"](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) instructions to create a new fork of the Stanford Spezi repository you want to contribute to.
 
-Spezi has a great collection of Swift Package-based modules: https://swiftpackageindex.com/StanfordSpezi.
-
-"Swift packages are reusable components of Swift, Objective-C, Objective-C++, C, or C++ code that developers can use in their projects." [Swift Packages - Apple Documentation]. Contributing to Spezi requires a fundamental understanding of the structure of a Swift Package. Please take a look at the Creating a standalone Swift package with Xcode article by Apple detailing the structure of a Swift Package. Each Spezi Module contains a Swift Package including the Package.swift file at the root of the repository.
-
-You can open a Swift Package in Xcode by opening the Package.swift file with Xcode. All Swift Packages are localized (learn more at Localizing package resources - Apple Documentation) and some Packages bundle resources such as JSON files and images (Bundling resources with a Swift package - Apple Documentation).
-
-All Spezi Modules contain a testing setup, it is essential to test all the functionality and run those tests during the development process. You can learn more about running tests in Xcode: Running tests and interpreting results - Apple Documentation.
-
-All Spezi Modules that contain user interface elements contain a UI (user interface) test application that allows us to write UI test for the packages and test out user interfaces in a small example application. You can find it in the Tests/UITests folder and we recommend to work in this project when developing on a Spezi package that contains a user interface.
+Once you have created a fork of the repository, you can start to make any changes in conformance with this contributing guide to your repository.
+Once you have properly tested, documented, and validated all the changes, you MUST use a pull request to contribute your changes back to the upstream repository.
+"A pull request is a proposal to merge a set of changes from one branch into another."[[About pull requests - GitHub Documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)].
+We RECOMMEND to follow the ["Creating a pull request from a fork"](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) instructions to create a PR based on the fork that you have created.
+We RECOMMEND to request a PR review from one of the core team members.
+Each PR MUST provide a proper description based on the [PR template](.github/pull_request_template.md) displayed when you create a PR and SHOULD be tagged with the appropriate labels and linked to any related GitHub issues or discussions.
 
 ## Documentation
 
@@ -93,3 +89,37 @@ Please refer to our [Support Policy](https://github.com/StanfordSpezi/.github/bl
 ## Security Policy
 
 For security and vulnerability-related issues, please refer to our [Support Policy](https://github.com/StanfordSpezi/.github/blob/main/SUPPORT.md).
+
+## Programming Language-specific Setups
+
+Stanford Spezi consists of a wide variety of projects in different programming languages.
+While many things are common to all the different programming languages and setups, some specific subsystems have dedicated setups to make contributing, testing, and documenting easier.
+
+### Swift-based Spezi Projects
+
+Spezi has a great collection of Swift Package-based modules: https://swiftpackageindex.com/StanfordSpezi.
+
+#### Swift Packages
+
+"Swift packages are reusable components of Swift, Objective-C, Objective-C++, C, or C++ code that developers can use in their projects." [[Swift Packages - Apple Documentation](https://developer.apple.com/documentation/xcode/swift-packages)]. Contributing to Spezi requires a fundamental understanding of the structure of a Swift Package. Please take a look at the [Creating a standalone Swift package with Xcode article by Apple](https://developer.apple.com/documentation/xcode/creating-a-standalone-swift-package-with-xcode) detailing the structure of a Swift Package. Each Spezi Module contains a Swift Package, including the `Package.swift` file at the root of the repository.
+
+You can open a Swift Package in Xcode by opening the Package.swift file with Xcode.
+All Swift Packages are localized (learn more at [Localizing package resources - Apple Documentation](https://developer.apple.com/documentation/xcode/bundling-resources-with-a-swift-package)) and some Packages bundle resources such as JSON files and images ([Bundling resources with a Swift package - Apple Documentation](https://developer.apple.com/documentation/xcode/bundling-resources-with-a-swift-package)).
+All contributions MUST use these localization features and MUST use the Swift Package Manager mechanism to bundle resources with a Swift Package.
+
+#### Testing
+
+As noted in the Contributing Guidelines, all changes MUST be properly tested.
+Therefore, all Swift Spezi Modules contain a testing setup; it is essential to test all the functionality and run those tests during the development process.
+You can learn more about running tests in [Xcode: Running tests and interpreting results - Apple Documentation](https://developer.apple.com/documentation/xcode/running-tests-and-interpreting-results).
+
+All Spezi Modules that contain user interface elements contain a UI (user interface) test application that allows us to write UI tests for the packages and test out user interfaces in a small example application.
+You can find it in the `Tests/UITests` folder, and we RECOMMEND working on this project when developing a Spezi package that contains a user interface.
+All user interface-related changes MUST be tested using UI tests.
+The [WWDC 2020 session "Write tests to fail"](https://developer.apple.com/wwdc20/10091) is a great resource for learning more about UI testing.
+
+#### Documentation
+
+The Swift-based Stanford Spezi modules contain a [DocC-based](https://github.com/apple/swift-docc) documentation merging inline documentation, dedicated articles, and tutorials within a single documentation bundle deployed to the Swift Package Index.
+
+Individual symbols MUST 
