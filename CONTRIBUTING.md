@@ -33,7 +33,7 @@ In addition, all commits to Spezi repositories MUST be signed.
 > [!IMPORTANT]  
 > Be sure to set up commit signature verification **before** you make your first commit to a Stanford Spezi repository or a fork you plan to use to contribute to a Stanford Spezi repository.
 
-## Make your Contribution: Fork & Pull Request 
+## Make Your Contribution: Fork & Pull Request 
 
 The Stanford Spezi open-source project follows the [Github Flow](https://docs.github.com/en/get-started/using-github/github-flow) to enable everyone to easily contribute to a repositiry using [forks](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks) and [pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
 
