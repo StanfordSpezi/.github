@@ -71,6 +71,11 @@ on:
         required: false
         type: string
         default: ''
+      environment:
+        description: 'GitHub deployment environment to optionally adjust access to variables and secrets with additional protection rules: https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment'
+        required: false
+        type: string
+        default: ''
       setupsigning:
         description: 'Setup the keychain to include Apple certificate and provisioning profile'
         required: false
@@ -82,10 +87,15 @@ on:
         type: boolean
         default: false
       setupfirebaseemulator:
-        description: 'Setup the Firebase Emulator'
+        description: 'Setup the Firebase Emulator & automatically use it for the automated fastlane commands.'
         required: false
         type: boolean
         default: false
+      firebaseemulatorimport:
+        description: 'Firebase import directory that contains Authentication, Cloud Firestore, Realtime Database and Cloud Storage data for Firebase emulators to use as a shareable, common baseline data set.'
+        required: false
+        type: string
+        default: ''
       googleserviceinfoplistpath:
         description: 'Path to the GoogleService-Info.plist file that is replaced using the content found in the secret GOOGLE_SERVICE_INFO_PLIST'
         required: false
@@ -134,6 +144,9 @@ on:
       GOOGLE_SERVICE_INFO_PLIST_BASE64:
         description: 'The Base64 version of the GoogleService-Info.plist file that is used to replace the file found at googleserviceinfoplistpath if the arguemnt is set.'
         required: false
+      GOOGLE_APPLICATION_CREDENTIALS_BASE64:
+        description: 'The Base64 version of the private key JSON file to boot up the firebase emulator to fully support the execution of cloud functions in the emulator. Only needed if cloud functions are used.'
+        required: false
 
 jobs:
   build_and_test:
@@ -142,6 +155,7 @@ jobs:
     defaults:
       run:
         working-directory: ${{ inputs.path }}
+    environment: ${{ inputs.environment }}
     steps:
     - uses: actions/checkout@v4
       with:
@@ -156,9 +170,10 @@ jobs:
           xcodebuild -version
           swift --version
           echo "env.selfhosted: ${{ env.selfhosted }}"
-    - name: Install xcpretty
+          echo "environment: ${{ inputs.environment }}"
+    - name: Install xcbeautify
       if: ${{ !env.selfhosted && inputs.scheme != '' }}
-      run: gem install xcpretty
+      run: brew install xcbeautify
     - name: Cache .derivedData folder
       if: ${{ inputs.cacheDerivedData }}
       uses: actions/cache@v4
@@ -230,7 +245,7 @@ jobs:
         echo -n "${{ secrets.GOOGLE_SERVICE_INFO_PLIST_BASE64 }}" | base64 --decode -o "${{ inputs.googleserviceinfoplistpath }}"
     - name: Initialize CodeQL
       if: ${{ !env.selfhosted && inputs.codeql }}
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: swift
         db-location: '${{ inputs.path }}/.codeql'
@@ -328,7 +343,8 @@ jobs:
             -scheme ${{ inputs.scheme }} \
             -resolvePackageDependencies \
             -derivedDataPath ".derivedData" \
-            || true
+          | xcbeautify \
+          || true
     - name: Build and test (xcodebuild)
       if: ${{ inputs.scheme != '' }}
       run: |
@@ -364,18 +380,36 @@ jobs:
             OTHER_SWIFT_FLAGS="\$(inherited) $ENABLE_TESTING_FLAG" \
             -skipPackagePluginValidation \
             -skipMacroValidation \
-          | xcpretty
+          | xcbeautify
     - name: Fastlane
       if: ${{ inputs.fastlanelane != '' }}
-      run: fastlane ${{ inputs.fastlanelane }}
+      run: |
+          if ${{ inputs.setupfirebaseemulator }}; then
+              # We try to do an npm install in the functions directory.
+              npm --prefix ./functions install || true
+
+              echo -n "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}" | base64 -d > "$RUNNER_TEMP/google-application-credentials.json"
+              export GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/google-application-credentials.json"
+              echo "Stored the Google application credentials at $GOOGLE_APPLICATION_CREDENTIALS"
+
+              if [ -n "${{ inputs.firebaseemulatorimport }}" ]; then
+                  echo "Importing firebase emulator data from ${{ inputs.firebaseemulatorimport }}"
+                  firebase emulators:exec --import=${{ inputs.firebaseemulatorimport }} 'fastlane ${{ inputs.fastlanelane }}'
+              else
+                  firebase emulators:exec 'fastlane ${{ inputs.fastlanelane }}'
+              fi
+          else
+              fastlane ${{ inputs.fastlanelane }}
+          fi
       env:
         APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
         APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
         APP_STORE_CONNECT_API_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
         APPLE_ID: ${{ secrets.APPLE_ID }}
+        GOOGLE_APPLICATION_CREDENTIALS_BASE64: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
     - name: Perform CodeQL Analysis
       if: ${{ !env.selfhosted && inputs.codeql }}
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
     - name: Upload artifact
       if: ${{ (success() || failure()) && inputs.artifactname != '' && inputs.buildConfig != 'Release' }}
       uses: actions/upload-artifact@v4
@@ -387,3 +421,7 @@ jobs:
       run: |
         security delete-keychain $RUNNER_TEMP/app-signing.keychain-db || true
         rm -rf ~/Library/MobileDevice/Provisioning\ Profiles || true
+    - name: Clean up Google application credentials
+      if: ${{ inputs.fastlanelane != '' || failure() }}
+      run: |
+        rm -rf $RUNNER_TEMP/google-application-credentials.json || true
