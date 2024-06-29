@@ -110,6 +110,10 @@ on:
         description: "Flag indicating if submodules should be automatically checked out."
         required: false
         type: boolean
+      warningsAsErrors:
+        description: 'Flag indicating if warnings should be treated as errors by the Swift compiler.'
+        required: false
+        type: boolean
     secrets:
       BUILD_CERTIFICATE_BASE64:
         description: 'The Base64 version of the Apple signing certificate to build your iOS application.'
@@ -367,6 +371,12 @@ jobs:
               ENABLE_TESTING_FLAG=""
           fi
 
+          if [ "${{ inputs.warningsAsErrors }}" = true ]; then
+              WARNINGS_AS_ERRORS_FLAG="-warnings-as-errors"
+          else
+              WARNINGS_AS_ERRORS_FLAG=""
+          fi
+
           set -o pipefail \
           && xcodebuild $XCODECOMMAND \
             -scheme "${{ inputs.scheme }}" \
@@ -377,7 +387,7 @@ jobs:
             -resultBundlePath "$RESULTBUNDLE" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
-            OTHER_SWIFT_FLAGS="\$(inherited) $ENABLE_TESTING_FLAG" \
+            OTHER_SWIFT_FLAGS="\$(inherited) $ENABLE_TESTING_FLAG $WARNINGS_AS_ERRORS_FLAG" \
             -skipPackagePluginValidation \
             -skipMacroValidation \
           | xcbeautify
