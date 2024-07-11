@@ -51,8 +51,13 @@ on:
         required: false
         type: string
         default: ''
+      swiftVersion:
+        description: 'Specify the Swift language version when using xcodebuild.'
+        required: false
+        type: string
+        default: ''
       test:
-        description: 'A flag indicating if the tests of the Xcode project scheme should run'
+        description: 'A flag indicating if the tests of the Xcode project scheme should run when using xcodebuild.'
         required: false
         type: boolean
         default: true
@@ -366,6 +371,12 @@ jobs:
           else
               ENABLE_TESTING_FLAG=""
           fi
+        
+          if [ -z "${{ inputs.swiftVersion }}"]; then
+              SWIFT_VERSION_FLAG="-swift-version ${{ inputs.swiftVersion }}"
+          else
+              SWIFT_VERSION_FLAG=""
+          fi
 
           set -o pipefail \
           && xcodebuild $XCODECOMMAND \
@@ -377,7 +388,7 @@ jobs:
             -resultBundlePath "$RESULTBUNDLE" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
-            OTHER_SWIFT_FLAGS="\$(inherited) $ENABLE_TESTING_FLAG -swift-version 6" \
+            OTHER_SWIFT_FLAGS="\$(inherited) $ENABLE_TESTING_FLAG $SWIFT_VERSION_FLAG" \
             -skipPackagePluginValidation \
             -skipMacroValidation \
           | xcbeautify
