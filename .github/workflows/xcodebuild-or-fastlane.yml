@@ -42,7 +42,7 @@ on:
         type: string
         default: 'platform=iOS Simulator,name=iPhone 15 Pro'
       setupSimulators:
-        description: 'Flag indicating if all iOS simulators matching the `destination` input shoud be setup (e.g. password autofill functionality should be disabled).'
+        description: 'Flag indicating if all iOS simulators matching the `destination` input should be setup (e.g. password autofill functionality should be disabled).'
         required: false
         type: boolean
         default: false
@@ -377,7 +377,7 @@ jobs:
             -resultBundlePath "$RESULTBUNDLE" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
-            OTHER_SWIFT_FLAGS="\$(inherited) $ENABLE_TESTING_FLAG" \
+            OTHER_SWIFT_FLAGS="\$(inherited) $ENABLE_TESTING_FLAG --swift-version 6" \
             -skipPackagePluginValidation \
             -skipMacroValidation \
           | xcbeautify
