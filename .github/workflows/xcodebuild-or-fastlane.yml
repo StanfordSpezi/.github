@@ -372,7 +372,7 @@ jobs:
               ENABLE_TESTING_FLAG=""
           fi
         
-          if [ -z "${{ inputs.swiftVersion }}"]; then
+          if [ -n "${{ inputs.swiftVersion }}" ]; then
               SWIFT_VERSION_FLAG="-swift-version ${{ inputs.swiftVersion }}"
           else
               SWIFT_VERSION_FLAG=""
