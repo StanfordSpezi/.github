@@ -377,7 +377,7 @@ jobs:
             -resultBundlePath "$RESULTBUNDLE" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
-            OTHER_SWIFT_FLAGS="\$(inherited) $ENABLE_TESTING_FLAG --swift-version 6" \
+            OTHER_SWIFT_FLAGS="\$(inherited) $ENABLE_TESTING_FLAG -swift-version 6" \
             -skipPackagePluginValidation \
             -skipMacroValidation \
           | xcbeautify
