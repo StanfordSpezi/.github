@@ -86,6 +86,11 @@ on:
         required: false
         type: boolean
         default: false
+      cacheDerivedData:
+        description: 'Cache the derived data folder for a build using xcodebuild [Deprecated].'
+        required: false
+        type: boolean
+        default: false
       setupfirebaseemulator:
         description: 'Setup the Firebase Emulator & automatically use it for the automated fastlane commands.'
         required: false
@@ -174,6 +179,10 @@ jobs:
     - name: Install xcbeautify
       if: ${{ !env.selfhosted && inputs.scheme != '' }}
       run: brew install xcbeautify
+    - name: Cache .derivedData folder (Deprecated)
+      if: ${{ inputs.cacheDerivedData }}
+      run: |
+        echo "::warning::Caching of the .derivedData folder was removed and is deprecated. Plase stop using this option."
     - name: Cache Firebase Emulators
       if: ${{ !env.selfhosted && inputs.setupfirebaseemulator }}
       uses: actions/cache@v4
