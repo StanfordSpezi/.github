@@ -1,0 +1,38 @@
+#
+# This source file is part of the Stanford Spezi open-source project
+#
+# SPDX-FileCopyrightText: 2024 Stanford University and the project authors (see CONTRIBUTORS.md)
+#
+# SPDX-License-Identifier: MIT
+#
+
+name: Generate Repository Digest
+
+on:
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+          
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          
+      - name: Install gitingest
+        run: pip install gitingest
+        
+      - name: Generate digest
+        run: |
+          gitingest . > repo-digest.txt
+          
+      - name: Upload digest artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: repository-digest
+          path: repo-digest.txt
+          retention-days: 30
