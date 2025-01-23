@@ -1,0 +1,77 @@
+#
+# This source file is part of the Stanford Spezi open-source project
+#
+# SPDX-FileCopyrightText: 2024 Stanford University and the project authors (see CONTRIBUTORS.md)
+#
+# SPDX-License-Identifier: MIT
+#
+
+name: Generate Repository Digest
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: 'Directory to process (default: current directory)'
+        required: false
+        default: '.'
+        type: string
+      output:
+        description: 'Output file path'
+        required: false
+        default: 'repo-digest.txt'
+      max_size:
+        description: 'Maximum file size to process (in bytes)'
+        required: false
+        type: number
+      exclude_patterns:
+        description: 'Space-separated patterns to exclude'
+        required: false
+        type: string
+      include_patterns:
+        description: 'Space-separated patterns to include'
+        required: false
+        type: string
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install gitingest
+        run: pip install gitingest
+      - name: Generate digest
+        run: |
+          COMMAND="gitingest"
+        
+          if [ -n "${{ inputs.output }}" ]; then
+            COMMAND="$COMMAND -o ${{ inputs.output }}"
+          fi
+        
+          if [ -n "${{ inputs.max_size }}" ]; then
+            COMMAND="$COMMAND -s ${{ inputs.max_size }}"
+          fi
+        
+          if [ -n "${{ inputs.exclude_patterns }}" ]; then
+            for pattern in ${{ inputs.exclude_patterns }}; do
+              COMMAND="$COMMAND --exclude-pattern '$pattern'"
+            done
+          fi
+          
+          if [ -n "${{ inputs.include_patterns }}" ]; then
+            for pattern in ${{ inputs.include_patterns }}; do
+              COMMAND="$COMMAND --include-pattern '$pattern'"
+            done
+          fi
+        
+          COMMAND="$COMMAND ${{ inputs.source || '.' }}"
+          eval $COMMAND
+      - name: Upload digest artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: repository-digest
+          path: ${{ inputs.output || 'repo-digest.txt' }}
+          retention-days: 30
