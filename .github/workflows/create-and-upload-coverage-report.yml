@@ -23,7 +23,7 @@ on:
 jobs:
   create-and-upload-coverage-report:
     name: Create and upload coverage report
-    uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v2
+    uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@lukas/codecov-v5
     secrets:
       token: ${{ secrets.token }}
     with:
