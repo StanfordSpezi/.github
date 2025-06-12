@@ -7,10 +7,15 @@ on:
         description: 'The name of the branch to compare against'
         required: true
         type: string
+      runsonlabels:
+        description: JSON-based collection of labels indicating which type of github runner should be chosen.
+        required: false
+        type: string
+        default: '["macos-latest"]'
 
 jobs:
   diagnose:
-    runs-on: macos-latest
+    runs-on: ${{ fromJson(inputs.runsonlabels) }}
     steps:
       - uses: actions/checkout@v4
       - name: Run diagnose-api-breaking-changes
