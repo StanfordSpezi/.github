@@ -10,8 +10,17 @@ name: SwiftLint
 
 on:
   workflow_call:
+    inputs:
+      version:
+        description: Swiftlint version
+        type: string
+        default: latest
+        required: false
+
 
 jobs:
   swiftlint:
     name: SwiftLint
     uses: StanfordBDHG/.github/.github/workflows/swiftlint.yml@v2
+    with:
+      version: ${{ inputs.version }}
