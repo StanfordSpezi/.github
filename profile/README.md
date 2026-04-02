@@ -15,6 +15,9 @@ SPDX-License-Identifier: MIT
 > [!NOTE]  
 > Stanford Spezi can be used to build mobile applications (iOS and Android), web services to store health data and interface with electronic health records, and web frontend applications. All use a common set of modules to simplify software development and improve reusability across systems.
 
+> [!TIP]
+> **Interested in vibe coding with Spezi?** [SpeziVibe](https://github.com/StanfordSpezi/SpeziVibe) provides a set of skills you can install into your favorite AI coding agent to walk you through the full process of planning and building a digital health app with Spezi.
+
 The following modules provide an overview of patient- and user-facing functionalities that can be implemented with Spezi to support research studies, electronic health record integration, and artificial intelligence–enabled systems:
 
 <table style="width: 80%">
