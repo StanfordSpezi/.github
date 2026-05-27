@@ -90,6 +90,18 @@ The following are examples of patient- and user-facing functionalities that can 
   </tr>
 </table>
 
+> [!TIP]
+> **Getting Started**
+> 
+> [SpeziVibe](https://github.com/StanfordSpezi/SpeziVibe) — start here if you're building with
+  AI coding tools (Claude Code, Codex, Gemini CLI). It installs a set of skills that walk your
+  agent through needs-finding, planning, and scaffolding, and helps you pick the right template
+  for your project (React Native or Apple-native).
+> 
+> [Spezi Template Application](https://github.com/StanfordSpezi/SpeziTemplateApplication) — the
+  Apple-native (SwiftUI) starting point. Clone this directly if you already know you're building
+  an iOS app on the Spezi ecosystem and don't need the AI-assisted planning flow.
+  
 We are always looking for open source collaborators. Please take a look at the [Code of Conduct](https://github.com/StanfordSpezi/.github/blob/main/CODE_OF_CONDUCT.md) and [Contributing Guidelines](https://github.com/StanfordSpezi/.github/blob/main/CONTRIBUTING.md) for more information.
 For more information, check out our website at [spezi.stanford.edu](https://spezi.stanford.edu).
 
