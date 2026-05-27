@@ -10,15 +10,11 @@ SPDX-License-Identifier: MIT
 
 ### Stanford Spezi
 
-[Spezi](https://github.com/StanfordSpezi/Spezi) is an open-source framework for rapid development of modern, interoperable digital health applications. It is built on an ecosystem of modules that exchange data using health standards such as HL7® FHIR®.
+[Spezi](https://github.com/StanfordSpezi/Spezi) is an open-source framework for rapid development of modern, interoperable digital health applications. It is built on an ecosystem of modules that exchange data using health standards such as HL7® FHIR®. Spezi can be used to build mobile applications (iOS and Android), web services to store health data and interface with electronic health records, and web frontend applications. All use a common set of modules to simplify software development and improve reusability across systems.
 
-> [!NOTE]  
-> Stanford Spezi can be used to build mobile applications (iOS and Android), web services to store health data and interface with electronic health records, and web frontend applications. All use a common set of modules to simplify software development and improve reusability across systems.
+[SpeziVibe](https://github.com/StanfordSpezi/SpeziVibe) provides a set of skills you can install into your favorite AI coding agent to walk you through the full process of planning and building a digital health app with Spezi.
 
-> [!TIP]
-> **Interested in vibe coding with Spezi?** [SpeziVibe](https://github.com/StanfordSpezi/SpeziVibe) provides a set of skills you can install into your favorite AI coding agent to walk you through the full process of planning and building a digital health app with Spezi.
-
-The following modules provide an overview of patient- and user-facing functionalities that can be implemented with Spezi to support research studies, electronic health record integration, and artificial intelligence–enabled systems:
+The following are examples of patient- and user-facing functionalities that can be implemented with Spezi on Apple Platforms to support research studies, electronic health record integration, and AI–enabled systems:
 
 <table style="width: 80%">
   <tr>
@@ -93,10 +89,6 @@ The following modules provide an overview of patient- and user-facing functional
     </td>
   </tr>
 </table>
-
-> [!NOTE]  
-> The best way to get started with Spezi for mobile application development is by using the [Spezi Template Application](https://github.com/StanfordSpezi/SpeziTemplateApplication).  
-> It integrates a wide range of modules and demonstrates their usage in a simple and extensible application.
 
 We are always looking for open source collaborators. Please take a look at the [Code of Conduct](https://github.com/StanfordSpezi/.github/blob/main/CODE_OF_CONDUCT.md) and [Contributing Guidelines](https://github.com/StanfordSpezi/.github/blob/main/CONTRIBUTING.md) for more information.
 For more information, check out our website at [spezi.stanford.edu](https://spezi.stanford.edu).
