@@ -269,7 +269,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'microsoft'
-          java-version: '17'
+          java-version: '21'
       - name: Install Firebase CLI Tools
         if: ${{ !env.selfhosted && inputs.setupfirebaseemulator }}
         run: npm install -g firebase-tools
