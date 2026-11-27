@@ -51,7 +51,12 @@ jobs:
           echo "environment: ${{ inputs.environment }}"
     - name: Install periphery
       if: ${{ !env.selfhosted }}
-      run: brew install peripheryapp/periphery/periphery
+      # Periphery is distributed through Homebrew core since 3.0; the peripheryapp/periphery tap is no longer updated
+      # and no longer loads with current Homebrew. Remove it from runners that still have it, and replace the binary it linked.
+      run: |
+        brew untap --force peripheryapp/periphery 2>/dev/null || true
+        brew install periphery || brew link --overwrite periphery
+        periphery version
     - name: Run periphery
       run: |
         periphery scan --relative-results --format github-actions --strict -- -skipPackagePluginValidation -skipMacroValidation
